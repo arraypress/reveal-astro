@@ -1,0 +1,75 @@
+---
+/**
+ * Reveal.astro
+ * ------------
+ *
+ * Mounts a single IntersectionObserver that adds a "visible" class to
+ * matching elements as they scroll into view — the cross-cutting
+ * scroll-reveal behaviour every page needs, in one place.
+ *
+ * Drop it once (e.g. near the end of your Layout). It is
+ * view-transition safe: it re-runs on every `astro:page-load`,
+ * disconnects the previous observer, and reveals already-in-view
+ * elements immediately so they don't flash. Pair with the animation
+ * CSS — either your own, or the optional `@arraypress/reveal-astro/reveal.css`.
+ *
+ * @example
+ *   ---
+ *   import { Reveal } from '@arraypress/reveal-astro';
+ *   import '@arraypress/reveal-astro/reveal.css';
+ *   ---
+ *   <div class="fade-in-up">Reveals on scroll</div>
+ *   <Reveal />
+ */
+import type { RevealProps } from './types';
+
+const {
+	selector = '.fade-in, .fade-in-up, .fade-in-down, .fade-in-left, .fade-in-right, .slide-in-up, .slide-in-down, .slide-in-left, .slide-in-right, .zoom-in, .zoom-out, .blur-in',
+	visibleClass = 'is-visible',
+	threshold = 0.08,
+	rootMargin = '0px 0px -10% 0px',
+	once = true,
+} = Astro.props as RevealProps;
+---
+
+<script
+	is:inline
+	define:vars={{ R_SEL: selector, R_CLS: visibleClass, R_TH: threshold, R_RM: rootMargin, R_ONCE: once }}
+>
+	(function () {
+		var run = function () {
+			/* Only target not-yet-revealed elements so re-runs after a
+			 * view transition don't re-observe everything. */
+			var sel = R_SEL.split(',').map(function (s) { return s.trim() + ':not(.' + R_CLS + ')'; }).join(',');
+
+			if (window.__apRevealObs) window.__apRevealObs.disconnect();
+			window.__apRevealObs = new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) {
+					if (e.isIntersecting) {
+						e.target.classList.add(R_CLS);
+						if (R_ONCE) window.__apRevealObs.unobserve(e.target);
+					} else if (!R_ONCE) {
+						e.target.classList.remove(R_CLS);
+					}
+				});
+			}, { threshold: R_TH, rootMargin: R_RM });
+
+			document.querySelectorAll(sel).forEach(function (el) {
+				/* Already in view on load → reveal immediately (no flash);
+				 * otherwise hand it to the observer. */
+				var r = el.getBoundingClientRect();
+				if (r.top < window.innerHeight && r.bottom > 0) {
+					el.classList.add(R_CLS);
+				} else {
+					window.__apRevealObs.observe(el);
+				}
+			});
+		};
+
+		/* Re-run on every view-transition navigation. Also run now so it
+		 * works WITHOUT <ClientRouter /> (where astro:page-load never fires). */
+		document.addEventListener('astro:page-load', run);
+		if (document.readyState !== 'loading') run();
+		else document.addEventListener('DOMContentLoaded', run);
+	})();
+</script>

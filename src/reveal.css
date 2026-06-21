@@ -1,0 +1,69 @@
+/**
+ * @arraypress/reveal-astro — optional default animations.
+ *
+ * Import this for drop-in scroll-reveal, or skip it and style the
+ * classes yourself. Each class sets a hidden "from" state; <Reveal />
+ * adds `.is-visible` when the element enters the viewport, which
+ * transitions it to the resting state.
+ *
+ * Honours `prefers-reduced-motion`: reduced-motion visitors get the
+ * content with no transform/opacity animation.
+ */
+
+.fade-in,
+.fade-in-up,
+.fade-in-down,
+.fade-in-left,
+.fade-in-right,
+.slide-in-up,
+.slide-in-down,
+.slide-in-left,
+.slide-in-right,
+.zoom-in,
+.zoom-out,
+.blur-in {
+	opacity: 0;
+	transition:
+		opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+		filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+
+.fade-in-up { transform: translateY(24px); }
+.fade-in-down { transform: translateY(-24px); }
+.fade-in-left { transform: translateX(24px); }
+.fade-in-right { transform: translateX(-24px); }
+.slide-in-up { transform: translateY(48px); }
+.slide-in-down { transform: translateY(-48px); }
+.slide-in-left { transform: translateX(48px); }
+.slide-in-right { transform: translateX(-48px); }
+.zoom-in { transform: scale(0.92); }
+.zoom-out { transform: scale(1.08); }
+.blur-in { filter: blur(12px); }
+
+.is-visible {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fade-in,
+	.fade-in-up,
+	.fade-in-down,
+	.fade-in-left,
+	.fade-in-right,
+	.slide-in-up,
+	.slide-in-down,
+	.slide-in-left,
+	.slide-in-right,
+	.zoom-in,
+	.zoom-out,
+	.blur-in {
+		opacity: 1;
+		transform: none;
+		filter: none;
+		transition: none;
+	}
+}

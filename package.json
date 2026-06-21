@@ -1,0 +1,61 @@
+{
+  "name": "@arraypress/reveal-astro",
+  "version": "1.0.0",
+  "description": "View-transition-safe scroll-reveal for Astro — one IntersectionObserver adds a visible class as elements enter the viewport. Optional default animation CSS.",
+  "type": "module",
+  "files": [
+    "src/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./Reveal.astro": "./src/Reveal.astro",
+    "./reveal.css": "./src/reveal.css",
+    "./types": {
+      "types": "./src/types.ts",
+      "default": "./src/types.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "astro",
+    "astro-component",
+    "scroll-reveal",
+    "intersection-observer",
+    "animation",
+    "fade-in",
+    "view-transitions",
+    "withastro"
+  ],
+  "author": "ArrayPress",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arraypress/reveal-astro.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "astro": "^6.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "astro": "^6.3.7",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.7"
+  }
+}
