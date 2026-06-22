@@ -1,6 +1,6 @@
 {
   "name": "@arraypress/reveal-astro",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "View-transition-safe scroll-reveal for Astro — one IntersectionObserver adds a visible class as elements enter the viewport. Optional default animation CSS.",
   "type": "module",
   "files": [
@@ -46,7 +46,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
-    "astro": "^6.0.0"
+    "astro": "^6.0.0 || ^7.0.0"
   },
   "scripts": {
     "test": "vitest run",
