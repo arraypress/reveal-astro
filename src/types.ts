@@ -6,7 +6,7 @@
 export interface RevealProps {
 	/**
 	 * Comma-separated CSS selector list of elements to reveal. Default:
-	 * the built-in `.fade-in*` / `.slide-in-*` / `.zoom-*` / `.blur-in`
+	 * the built-in `.fade-in*` / `.slide-in-*` / `.zoom-*` / `.flip-*` / `.blur-in`
 	 * family. Pass your own (e.g. `'[data-reveal]'`) to use a different
 	 * convention.
 	 */

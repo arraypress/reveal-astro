@@ -6,6 +6,10 @@
  * adds `.is-visible` when the element enters the viewport, which
  * transitions it to the resting state.
  *
+ * Families: fade (`fade-in`, `fade-in-up/down/left/right`), slide
+ * (`slide-in-up/down/left/right`), zoom (`zoom-in`, `zoom-out`), flip
+ * (`flip-up/down/left/right`), and `blur-in`.
+ *
  * Honours `prefers-reduced-motion`: reduced-motion visitors get the
  * content with no transform/opacity animation.
  */
@@ -21,6 +25,10 @@
 .slide-in-right,
 .zoom-in,
 .zoom-out,
+.flip-up,
+.flip-down,
+.flip-left,
+.flip-right,
 .blur-in {
 	opacity: 0;
 	transition:
@@ -40,6 +48,10 @@
 .slide-in-right { transform: translateX(-48px); }
 .zoom-in { transform: scale(0.92); }
 .zoom-out { transform: scale(1.08); }
+.flip-up { transform: perspective(2500px) rotateX(-100deg); }
+.flip-down { transform: perspective(2500px) rotateX(100deg); }
+.flip-left { transform: perspective(2500px) rotateY(-100deg); }
+.flip-right { transform: perspective(2500px) rotateY(100deg); }
 .blur-in { filter: blur(12px); }
 
 .is-visible {
@@ -60,6 +72,10 @@
 	.slide-in-right,
 	.zoom-in,
 	.zoom-out,
+	.flip-up,
+	.flip-down,
+	.flip-left,
+	.flip-right,
 	.blur-in {
 		opacity: 1;
 		transform: none;

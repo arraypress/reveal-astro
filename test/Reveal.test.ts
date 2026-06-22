@@ -38,6 +38,12 @@ describe('<Reveal>', () => {
 		expect(html).toContain('shown');
 	});
 
+	it('default selector includes the flip family', async () => {
+		const html = await render();
+		expect(html).toContain('flip-up');
+		expect(html).toContain('flip-right');
+	});
+
 	it('honours custom threshold, rootMargin and once', async () => {
 		const html = await render({ threshold: 0.5, rootMargin: '0px', once: false });
 		expect(html).toContain('0.5');
